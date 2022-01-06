@@ -18393,6 +18393,12 @@ function markdownReport(reports, commit, options) {
     const titleText = `<strong>${reportName}${folder}</strong>`;
     output += `${titleText}\n\n${table}\n\n`;
   }
+  if (output.length > 60000) {
+    // Trim output when too long
+    // https://github.community/t/undocumented-65535-character-limit-on-requests/117564/5
+    console.log("Trimming output...");
+    output = output.substring(0, 60000);
+  }
   const minimumCoverageText = `_Minimum allowed coverage is \`${minimumCoverage}%\`_`;
   const footerText = `<p align="right">${credits} against ${commit} </p>`;
   output += `${minimumCoverageText}\n\n${footerText}`;
