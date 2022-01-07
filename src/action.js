@@ -55,6 +55,9 @@ async function action(payload) {
     ? await listChangedFiles(pullRequestNumber)
     : null;
 
+  console.log("Changed files:")
+  console.log(await listChangedFiles(pullRequestNumber))
+
   const reports = await processCoverage(path, { skipCovered });
   const comment = markdownReport(reports, commit, {
     minimumCoverage,
